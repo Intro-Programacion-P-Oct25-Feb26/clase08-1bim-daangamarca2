@@ -6,6 +6,8 @@ si
 yes
 y
 
+para la solucion usar switch
+
  */
 package ejemplos02;
 
@@ -16,7 +18,7 @@ import java.util.Scanner;
  *
  * @author reroes
  */
-public class Ejemplo02 {
+public class Ejemplo021 {
 
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
@@ -34,9 +36,13 @@ public class Ejemplo02 {
             System.out.println("Ingrese (s, si, yes o y) si desea salir del ciclo ");
             salida = entrada.nextLine();
 
-            if (salida.equals("s") || salida.equals ("si") || salida.equals (
-                    "yes") || salida.equals ("y")) { 
-                bandera = false;
+            switch (salida) {
+                case "s":
+                case "si":
+                case "yes":
+                case "y":
+                    bandera = false;
+                    break;
             }
         } while (bandera);
         System.out.printf("Listado de Notas\n%s\n", cadenaFinal);
