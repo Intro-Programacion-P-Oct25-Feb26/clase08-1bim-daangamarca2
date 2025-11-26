@@ -25,27 +25,41 @@ public class Ejemplo09 {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
         entrada.useLocale(Locale.US);
-        
+
         String cadenaFinal;
         int nota;
         int salida;
-        String nombre; // *
+        String nombre;
+        String calificacion;
         double promedio;
         boolean bandera = true;
         int suma = 0;
         int contador_calificaciones = 0;
-        
-        cadenaFinal = "Listado de Notas\n";
-        
+        cadenaFinal = "";
+
         do {
-            
-            
+            System.out.println("Ingrese el nombre del estudiante:");
+            nombre = entrada.nextLine();
+            System.out.println("Ingrese la calificación del estudiante:");
+            nota = entrada.nextInt();
+
+            if (nota >= 5) {
+                calificacion = "(Muy buena)";
+            } else {
+                calificacion = "(Buena)";
+            }
+
+            cadenaFinal = String.format("%s\nListado de Notas\nCalificación"
+                    + " %d %s del estudiante %s",
+                    cadenaFinal,
+                    nota,
+                    calificacion,
+                    nombre);
             // agrego valor al acumulador
             suma = suma + nota;
-            // agrego una unidad al contador para luego sacar el promedio
+             // agrego una unidad al contador para luego sacar el promedio
             contador_calificaciones = contador_calificaciones + 1;
-            
-            
+
             System.out.println("Ingrese (-111) si desea salir del ciclo; "
                     + "cualquier otro número para continuar");
             salida = entrada.nextInt();
@@ -53,18 +67,25 @@ public class Ejemplo09 {
             if (salida == -111) {
                 bandera = false;
             }
-            // atención
-            entrada.nextLine(); // se limpia el buffer, pues el primer valor
-                               // que se solicita al inicio del ciclo es una
-                               // cadena
 
-        } while (bandera); // (bandera==true)
-        
-        // promedio = suma / contador_calificaciones;
-        promedio = (double)suma / contador_calificaciones;
-        cadenaFinal = String.format("%s\nPromedio de calificaciones: %.2f",
+            // Limpia el buffer de entrada para la próxima lectura de String
+            entrada.nextLine();
+
+        } while (bandera);
+
+        // Calcula el promedio asegurando la división con punto flotante (double)
+        if (contador_calificaciones > 0) {
+            promedio = (double) suma / contador_calificaciones;
+        } else {
+            promedio = 0.0;
+        }
+
+        // Agrega la línea divisoria y el promedio al reporte final
+        cadenaFinal = String.format("%s\n\nPromedio de calificaciones: %.2f",
                 cadenaFinal,
                 promedio);
+
+        // Muestra el reporte final
         System.out.printf("%s\n", cadenaFinal);
     }
 }
